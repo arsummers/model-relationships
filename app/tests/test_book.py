@@ -14,7 +14,7 @@ def test_solo_book_fixture(solo_book):
     assert solo_book.name == 'Good Omens'
 
 def test_create_book_with_author(client, sample_author):
-    book_info = {'name':'The Fifth Season', 'author':'N.K. Jemisin'}
+    book_info = {'name':'The Fifth Season', 'author':'NK Jemisin'}
     response = client.post('/books', data=book_info)
     assert response.status_code == 200
 

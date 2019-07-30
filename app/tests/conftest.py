@@ -26,7 +26,7 @@ def client():
 
 @pytest.fixture
 def sample_author(client):
-    author = Author(name='N.K. Jemisin')
+    author = Author(name='NK Jemisin')
     db.session.add(author)
     db.session.commit()
     return author
