@@ -59,8 +59,10 @@ def create_app(ConfigClass):
             
             author = Author.query.filter_by(name=name).first()
             return jsonify(author.to_dict)
-        
-        # BOOKS
+
+ ######################       
+########## BOOKS CRUD ######
+###########################
 
         @app.route('/books', methods=['GET'])
         def all_books():
@@ -75,21 +77,34 @@ def create_app(ConfigClass):
         @app.route('/books', methods=['POST'])
         def create_book():
             book_info = request.json or request.form
-            book = Book(name=book_info.get('name'))
+            book = Book(
+                name=book_info.get('name'),
+                author_id=book_info.get('author'))
 
             db.session.add(book)
             db.session.commit()
 
             return jsonify(book.to_dict())
 
-        @app.route('/books/<int:id>', methods=['DELETE'])
-        def delete_book(id):
-            pass
-
         @app.route('/books/<int:id>', methods=['PUT'])
         def update_book(id):
-            pass
+            book_info = request.json or request.form
+            book_id = Book.query.filter_by(id=id).update(book_info)
+            db.session.commit()
+            return jsonify(book_id)
 
+        @app.route('/books/<int:id>', methods=['DELETE'])
+        def delete_book(id):
+            book = Book.query.get(id)
+            db.session.delete(book)
+            db.session.commit()
+            return jsonify(id)
+        
+
+        @app.route('/authors/<int:id>/books')
+        def get_books_by_author(id):
+            books = [book.to_dict() for book in Author.query.get(id).books]
+            return jsonify(books)
         return app
         
 from app.models import Author, Book
