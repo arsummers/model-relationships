@@ -16,7 +16,7 @@ def client():
 
     db.create_all()
 
-    with app.text_client() as client:
+    with app.test_client() as client:
         yield client
 
     db.session.remove()
