@@ -1,8 +1,8 @@
-"""typos fixed
+"""again again
 
-Revision ID: a61ffd4f1172
+Revision ID: dc2b50bbe62b
 Revises: 
-Create Date: 2019-07-29 17:32:48.261236
+Create Date: 2019-07-29 18:07:18.652579
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a61ffd4f1172'
+revision = 'dc2b50bbe62b'
 down_revision = None
 branch_labels = None
 depends_on = None
