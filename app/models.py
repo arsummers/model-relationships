@@ -6,7 +6,11 @@ class Author(db.Model):
     books = db.relationship('Book', backref='author', lazy=True)
 
     def to_dict(self):
-        return {'id':self.id, 'name':self.name}
+        return {
+            'id':self.id,
+            'name':self.name,
+            'books':[book.to_dict() for book in self.books]
+         }
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
